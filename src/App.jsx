@@ -4,14 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const endpointTV = "https://api.themoviedb.org/3/search/tv?api_key="
-const endpointMovie = "https://api.themoviedb.org/3/search/movie?api_key="
 
 function App() {
-  const [searchInput, setSearchInput] = useState("");
-  const [tvResults, setTvResults] = useState([]);
-  const [movieResults, setMovieResults] = useState([]);
+ 
 
   function getStars(num) {
 
@@ -28,29 +23,6 @@ function App() {
       </>
     );
 
-  }
-
-
-
-  function handleSearch() {
-
-    axios
-      .get(endpointMovie + API_KEY + "&query=" + searchInput)
-      .then(response => {
-        setMovieResults(response.data.results)
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    axios
-      .get(endpointTV + API_KEY + "&query=" + searchInput)
-      .then(response => {
-        setTvResults(response.data.results)
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   function languageToCountry(lang) {
