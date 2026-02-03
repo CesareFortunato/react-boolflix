@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const endpointTV = "https://api.themoviedb.org/3/search/tv?api_key="
@@ -9,6 +12,25 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [tvResults, setTvResults] = useState([]);
   const [movieResults, setMovieResults] = useState([]);
+
+  function getStars(num) {
+
+    const stars = Math.ceil(num / 2);
+
+    return (
+      <>
+        {[...Array(5)].map((_, i) => (
+          <FontAwesomeIcon
+            key={i}
+            icon={i < stars ? faStarSolid : faStarRegular}
+          />
+        ))}
+      </>
+    );
+
+  }
+
+
 
   function handleSearch() {
 
@@ -68,6 +90,8 @@ function App() {
             {tvResults.map(el => {
 
               const countryCode = languageToCountry(el.original_language);
+
+
               return (
                 <li key={el.id}>
                   <p>{el.name}</p>
@@ -79,7 +103,7 @@ function App() {
                   ) : (
                     <span>{el.original_language}</span>
                   )}
-                  <p>{el.vote_average}</p>
+                  <p>{getStars(el.vote_average)}</p>
                 </li>
               )
             })}
@@ -89,6 +113,7 @@ function App() {
             {movieResults.map(el => {
 
               const countryCode = languageToCountry(el.original_language);
+
               return (
                 <li key={el.id}>
                   <img
@@ -97,7 +122,7 @@ function App() {
                         ? `https://image.tmdb.org/t/p/w342${el.poster_path}`
                         : "https://via.placeholder.com/342x513?text=No+Image"
                     }
-                    alt={el.name}/>
+                    alt={el.title} />
                   <p>{el.title}</p>
                   <p>{el.original_title}</p>
                   {countryCode ? (
@@ -107,7 +132,7 @@ function App() {
                   ) : (
                     <span>{el.original_language}</span>
                   )}
-                  <p>{el.vote_average}</p>
+                  <p>{getStars(el.vote_average)}</p>
                 </li>
               )
             })}
