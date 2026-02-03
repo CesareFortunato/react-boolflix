@@ -5,11 +5,14 @@ import './index.css'
 import App from './App.jsx'
 import "flag-icons/css/flag-icons.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SearchProvider } from "./context/SearchContext.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <SearchProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </SearchProvider>
   </StrictMode>,
 )
