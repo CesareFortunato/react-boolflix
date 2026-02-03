@@ -1,5 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+
 
 //variabile context
 const SearchContext = createContext();
@@ -19,7 +23,43 @@ export function SearchProvider({ children }) {
     const [tvResults, setTvResults] = useState([]);
     const [movieResults, setMovieResults] = useState([]);
 
-//funzione per far partire le chiamate
+    //funzione per icone stella
+
+    function getStars(num) {
+
+        const stars = Math.ceil(num / 2);
+
+        return (
+            <>
+                {[...Array(5)].map((_, i) => (
+                    <FontAwesomeIcon
+                        key={i}
+                        icon={i < stars ? faStarSolid : faStarRegular}
+                    />
+                ))}
+            </>
+        );
+
+    }
+
+    //funzione per flag lingue
+
+    function languageToCountry(lang) {
+        const map = {
+            en: "gb",
+            it: "it",
+            fr: "fr",
+            es: "es",
+            de: "de",
+            ja: "jp",
+            ko: "kr",
+            zh: "cn"
+        };
+
+        return map[lang] || null;
+    }
+
+    //funzione per far partire le chiamate
 
     function handleSearch() {
 
@@ -53,6 +93,10 @@ export function SearchProvider({ children }) {
         // setters / actions
         setSearchInput,
         handleSearch,
+        
+        // utilities
+        getStars,
+        languageToCountry,
     };
 
 

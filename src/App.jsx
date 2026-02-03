@@ -1,44 +1,12 @@
-import { useState } from 'react'
-import axios from 'axios';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+
 
 
 function App() {
- 
 
-  function getStars(num) {
 
-    const stars = Math.ceil(num / 2);
 
-    return (
-      <>
-        {[...Array(5)].map((_, i) => (
-          <FontAwesomeIcon
-            key={i}
-            icon={i < stars ? faStarSolid : faStarRegular}
-          />
-        ))}
-      </>
-    );
 
-  }
 
-  function languageToCountry(lang) {
-    const map = {
-      en: "gb",
-      it: "it",
-      fr: "fr",
-      es: "es",
-      de: "de",
-      ja: "jp",
-      ko: "kr",
-      zh: "cn"
-    };
-
-    return map[lang] || null;
-  }
 
   return (
 
