@@ -6,13 +6,14 @@ const endpoint = "https://api.themoviedb.org/3/search/tv?api_key="
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
+  const [tvResults, setTvResults] = useState([]);
 
   function handleSearch() {
 
     axios
       .get(endpoint + API_KEY + "&query=" + searchInput)
       .then(response => {
-        console.log(response.data.results)
+        setTvResults(response.data)
       })
   }
 
@@ -33,6 +34,16 @@ function App() {
               Cerca
             </button>
           </div>
+          <ul>
+            {tvResults.map(el =>
+            (<li key={el.id}>
+              <p>{el.name}</p>
+              <p>{el.original_name}</p>
+              <p>{el.original_language}</p>
+              <p>{el.vote_average}</p>
+            </li>)
+            )}
+          </ul>
         </div>
       </div>
     </div>
