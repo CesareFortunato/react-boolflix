@@ -1,4 +1,5 @@
-import { useSearch } from "../contexts/SearchContext";
+import { useSearch } from "../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
     const {
@@ -7,9 +8,12 @@ function Header() {
         handleSearch
     } = useSearch();
 
+    const navigate = useNavigate();
+
     function handleSubmit(e) {
         e.preventDefault();
         handleSearch();
+        navigate("/search");
     }
 
     return (
@@ -22,6 +26,7 @@ function Header() {
                 </div>
 
                 {/* Search */}
+                {/* form per fare invio da tastiera */}
                 <form className="d-flex gap-2" onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -29,6 +34,7 @@ function Header() {
                         placeholder="Cerca un film o una serie..."
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
+
                     />
 
                     <button className="btn btn-danger" type="submit">
@@ -41,3 +47,5 @@ function Header() {
 
     )
 }
+
+export default Header

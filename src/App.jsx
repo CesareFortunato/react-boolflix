@@ -1,4 +1,4 @@
-import { SearchProvider } from "./contexts/SearchContext";
+import { SearchProvider } from "./context/SearchContext";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
