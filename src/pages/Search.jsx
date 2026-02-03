@@ -1,7 +1,10 @@
 import { useSearch } from "../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 const IMG_BASE = "https://image.tmdb.org/t/p/w342";
-const PLACEHOLDER = "https://via.placeholder.com/342x513?text=No+Image";
+const PLACEHOLDER = "https://dummyimage.com/342x513/444/ffffff&text=No+Image";
+
+
 
 function Search() {
   const {
@@ -11,6 +14,8 @@ function Search() {
     tvResults,
     movieResults,
   } = useSearch();
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -27,7 +32,7 @@ function Search() {
 
           return (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={el.id}>
-              <div className="card h-100 shadow-sm">
+              <div className="card h-100 shadow-sm" role="button" onClick={() => navigate(`/detail/tv/${el.id}`)}>
                 <img
                   className="card-img-top"
                   src={el.poster_path ? `${IMG_BASE}${el.poster_path}` : PLACEHOLDER}
@@ -72,7 +77,7 @@ function Search() {
 
           return (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={el.id}>
-              <div className="card h-100 shadow-sm">
+              <div className="card h-100 shadow-sm" role="button" onClick={() => navigate(`/detail/tv/${el.id}`)}>
                 <img
                   className="card-img-top"
                   src={el.poster_path ? `${IMG_BASE}${el.poster_path}` : PLACEHOLDER}

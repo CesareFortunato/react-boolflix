@@ -1,5 +1,6 @@
 import { useSearch } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
     const {
@@ -21,9 +22,9 @@ function Header() {
             <div className="container d-flex align-items-center justify-content-between gap-3">
 
                 {/* Logo */}
-                <div className="fw-bold fs-4">
+                <Link to="/" className="fw-bold fs-4 text-white text-decoration-none">
                     BoolFlix
-                </div>
+                </Link>
 
                 {/* Search */}
                 {/* form per fare invio da tastiera */}
